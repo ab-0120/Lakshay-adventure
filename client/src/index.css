@@ -44,3 +44,9 @@
     0%, 100% {box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.5); }
     50% {box-shadow: 0 0 0 10px rgba(6, 182, 212, 0);}
 }
+
+/* Scroll to Top animation */
+@keyframes float{
+    0%, 100% {transform: translateY(0);}
+    50% {transform: translateY(-5px);}
+}

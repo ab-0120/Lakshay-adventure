@@ -98,7 +98,7 @@ function HeroSlider(){
     const realIndex = ((index-1) % TOTAL + TOTAL) % TOTAL;
     //index = 1->0 , index= 2->1, index= 3->2, index= 4(clone)->0
     return(
-        <div className='relative w-full h-[88vh] overflow-hidden'>
+        <div className='relative w-full h-[78vh] overflow-hidden'>
 
             {/* The long horizontal strip conatting ALL slides */}
             <div className='flex h-full'

@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {FiMenu, FiX, FiChevronDown} from "react-icons/fi";
 import logo from "../assets/LA_crop.jpg";
 import {services} from '../data/services';
+import { useBooking } from "../context/BookingContext";
 
 // fonts
 const bebasNeueFontStyle = {fontFamily: "'Bebas Neue', cursive"};
@@ -21,6 +22,8 @@ function Navbar(){
     const [scrolled, setScrolled] = useState(false); //page scrolled- glassy Navbar
     const [brandHovered, setbrandHovered] = useState(false); //brand text glow
     const [mobileSvcOpen, setmobileSvcOpen] = useState(false);
+
+    const {openBooking} = useBooking();
 
     useEffect(()=>{
         const onScroll= () =>setScrolled(window.scrollY >10);
@@ -67,7 +70,7 @@ function Navbar(){
                  className={`hidden sm:inline text-lg tracking-widest
                     %{brandHovered ? "text-cyan-500" : "text-slate-800"}`}
                 >
-                    Lakshay Advnenture
+                    Lakshay Adventure
                 </span>
             </Link>
 
@@ -127,13 +130,19 @@ function Navbar(){
                 ))}
 
                 {/* Book NOW Button */}
-                <li>
+                {/* <li>
                     <Link to="/#contact" style={oswaldFontStyle}
                           className="ml-2 px-5 py-2 rounded-full bg-cyan-500 text-white text-xs uppercase 
                                      hover:bg-slate-900 hover:shadow-lg hover:shadow-cyan-500/30 hover:-translate-y-0.5 transition-all duration-300">
                         Book Now
                     </Link>
-                </li>
+                </li> */}
+                <button onClick={()=> openBooking()}
+                        style={oswaldFontStyle}
+                        className="ml-2 px-5 py-2 rounded-full bg-cyan-500 text-white text-xs uppercase 
+                                     hover:bg-slate-900 hover:shadow-lg hover:shadow-cyan-500/30 hover:-translate-y-0.5 transition-all duration-300">
+                    Book NOW
+                </button>
             </ul>
 
             {/* Hamburger - md:hidden only on MOBILE */}
@@ -207,13 +216,21 @@ function Navbar(){
                     </li>
                 ))}
 
-                <li className="mt-4 px-4">
+                {/* <li className="mt-4 px-4">
                     <Link to="/#contact" onClick={closeDrawer} style={oswaldFontStyle}
                           className="block text-center px-5 py-2.5 rounded-full bg-cyan-500 text-white text-sm uppercase
                                      hover:bg-slate-900 transition-all duration-300">
                         Book Now
                      </Link>
-                </li>
+                </li> */}
+
+                <button onClick={()=>openBooking()}
+                        style={oswaldFontStyle}
+                         className="block text-center px-5 py-2.5 rounded-full bg-cyan-500 text-white text-sm uppercase
+                                     hover:bg-slate-900 transition-all duration-300">
+                        Book Now
+                </button>
+
             </ul>
         </div>
 

@@ -1,13 +1,16 @@
 import Navbar from "./components/Navbar";
 import FloatingIcons from "./components/FloatingIcons";
-import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import RiverRafting from "./pages/RiverRafting";
 import ServiceComingSoon from "./pages/ServiceComingSoon";
+import BookingModal from "./components/Booking/BookingModal"
+import { Route, Routes } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App(){
   return(
     <div>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/services/river-rafting" element={<RiverRafting />} />
@@ -15,6 +18,7 @@ function App(){
       </Routes>
   
       <FloatingIcons />
+      <BookingModal />
     </div>
   )
 }

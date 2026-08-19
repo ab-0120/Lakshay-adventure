@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import ScrollProgress from "../components/ScrollProgress";
 import ScrollToTop from "../components/ScrollToTop";
 import ReviewsSection from "../components/ReviewsSection";
+import WhyChooseUs from "../components/WhyCooseUs";
 
 export default function Home(){
     return(
@@ -14,6 +15,7 @@ export default function Home(){
             <HeroSlider />
             {/* rest of the page */}
             <PopularPackagesSection />
+            <WhyChooseUs />
             <ReviewsSection />
             <Footer />
             <ScrollToTop />

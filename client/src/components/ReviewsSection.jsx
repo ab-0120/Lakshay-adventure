@@ -59,7 +59,7 @@ function ReviewsSection(){
 
     return(
 
-        <section ref={sectionRef} className="bg-slate-800 py-16 px-6 md:px-16 lg:px-24 mb-10">
+        <section ref={sectionRef} className="bg-slate-800 py-9 px-6 md:px-16 lg:px-24 mb-10">
 
             {/* Heading */}
             <Reveal className="text-center mb-10">
@@ -77,13 +77,13 @@ function ReviewsSection(){
             <a href={JUSTDIAL_URL} target="_blank" rel="noopener noreferrer"
                className="group block max-w-3xl mx-auto">
 
-                <div className="relative bg-slate-800 rounded-3xl border border-slate-700 overflow-hidden
+                <div className="relative bg-white rounded-3xl border border-slate-700 overflow-hidden
                                 group-hover:border-cyan-500 group-hover:shadow-2xl group-hover:shadow-cyan-500/10
                                 transition-all duration-500">
 
                     {/* Hover - glow overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent
-                                    opacity-0 group-hoveR:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                     {/* LEFT RIGHT split */}
                     <div className="flex flex-col sm:flex-row">
@@ -93,7 +93,7 @@ function ReviewsSection(){
                                         border-b sm:border-b-0 sm:border-r border-slate-700">
 
                             {/* 4.9 counts up */}
-                            <div className="text-white leading-none mb-3 transition-all duration-700"
+                            <div className="text-slate-900 leading-none mb-3 transition-all duration-700"
                                  style={{
                                     ...bebas,
                                     fontSize: "6rem",
@@ -114,14 +114,14 @@ function ReviewsSection(){
                             </div>
 
                             {/* Review count */}
-                            <p className="text-slate-400 text-sm mb-6 transition-all duration-700"
+                            <p className="text-slate-500 text-sm mb-6 transition-all duration-700"
                                style={{
                                   ...oswald,
                                   transitionDelay: "300ms",
                                   opacity: visible ? 1 : 0
                                }}>
-                                Based on{" "}
-                                <span className="text-white font-semibold">{TOTAL_Reviews}+ verified reviews</span>
+                                Based on{"  "}
+                                <span className="text-slate-900 font-semibold">{TOTAL_Reviews}+ verified reviews</span>
                             </p>
 
                             {/* Arrow CTA */}

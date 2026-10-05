@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import RiverRafting from "./pages/RiverRafting";
 import ServiceComingSoon from "./pages/ServiceComingSoon";
 import BookingModal from "./components/Booking/BookingModal"
+import Contact from "./pages/Contact";
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -15,6 +16,7 @@ function App(){
         <Route path="/" element={<Home/>} />
         <Route path="/services/river-rafting" element={<RiverRafting />} />
         <Route path="/services/:slug" element={<ServiceComingSoon />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
   
       <FloatingIcons />

@@ -4,7 +4,7 @@ const oswald = {fontFamily: "'Oswald', sans-serif", letterSpacing: "0.05rem"};
 const bebas = {fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem"};
 
 // whatsapp number to send sms
-const WHATSAPP_NUMBER = "917060459673";
+const WHATSAPP_NUMBER = "918006987421";
 
 function Step3_Summary({service, date, time, persons, onBack, onClose}){
 

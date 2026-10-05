@@ -31,7 +31,7 @@ const SectionTitle = ({children}) => (
 
 function Footer() {
     return(
-        <footer id="contact" className="bg-slate-900 text-slate-400">
+        <footer className="bg-slate-900 text-slate-400">
             <div className="px-6 md:px-16 lg:px-24 py-14
                             grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
     
@@ -99,7 +99,7 @@ function Footer() {
                     <ul className="flex flex-col gap-3 text-sm">
                         <li className="flex items-start gap-3">
                             <FiMapPin className="text-cyan-400 mt-0.5 shrink-0" size={16} />
-                            <span>Lakshman Jhula Road, Tapovan, Rishikesh, Uttarakhand 249192</span>
+                            <span>Amkhala, Near Burger King, Lakshman Jhula Road, Tapovan, Rishikesh, Uttarakhand 249192</span>
                         </li>
 
                         <li>

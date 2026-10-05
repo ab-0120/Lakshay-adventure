@@ -4,6 +4,7 @@ import raftingImg3 from '../assets/slider/raftingImg3.jpg';
 import raftingImg4 from '../assets/slider/raftingImg4.jpg';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 const slides = [
     {
@@ -15,17 +16,17 @@ const slides = [
     },
     {
         image: raftingImg2,
-        overlay: "from-emerald-900/70 to-slate-900/60", //Tailwind gradient classes
-        tag: "Camp Under",
-        title: "THE HIMALAYAN STARS",
-        sub: "Where crackling bonfires meet mountain silence",
+        overlay: "from-blue-900/70 to-slate-900/60", //Tailwind gradient classes
+        tag: "Conquer the",
+        title: "SHIVPURI RAPIDS",
+        sub: "16 km of absolute thrill",
     },
     {
         image: raftingImg3,
-        overlay: "from-amber-900/70 to-slate-900/60", //Tailwind gradient classes
-        tag: "Trek Through",
-        title: "SACRED VALLEYS",
-        sub: "Discover trails that breathe ancient stories", 
+        overlay: "from-teal-900/70 to-slate-900/60", //Tailwind gradient classes
+        tag: "Expedition at",
+        title: "KAUDIYALA GORGE",
+        sub: "A full day Grade IV-V for serious thrill seekers", 
     }
 ];
 
@@ -42,6 +43,8 @@ const textAnims = {
 };
 
 function HeroSlider(){
+
+    const gotoPage = useNavigate();
 
     //which position in the track are we showing ? starts at 1
     const [index, setIndex] = useState(1);
@@ -156,7 +159,8 @@ function HeroSlider(){
                                 </p>
 
                                 {/* CTA BUTTON */}
-                                <button className='mt-8 px-8 py-3 bg-cyan-500 hover:bg-black text-white font-bold text-sm tracking-widest uppercase rounded-full transition-colors duration-300 hover:scale-105 active:scale-95'
+                                <button onClick={() => gotoPage(`/services/river-rafting`)}
+                                        className='mt-8 px-8 py-3 bg-cyan-500 hover:bg-black text-white font-bold text-sm tracking-widest uppercase rounded-full transition-colors duration-300 hover:scale-105 active:scale-95'
                                         style={isActive ? {animation: `${textAnims.btn}, btnPulse 2.5s ease 1.2s infinite`}
                                                         : {opacity : 0}
                                             }>

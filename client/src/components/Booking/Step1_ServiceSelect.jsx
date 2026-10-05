@@ -5,10 +5,22 @@ import { useBooking } from "../../context/BookingContext";
 const oswald = {fontFamily: "'Oswald', sans-serif", letterSpacing: "0.05rem"};
 const bebas = {fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem"};
 
-function Step1_ServiceSelect(){
+//Only rafting has a live detail page
+const LIVE_PAGE_SERVICE_IDS = new Set(["river-rafting"]);
+
+function Step1_ServiceSelect({onSelect}){
 
      const navigate = useNavigate();
      const {closeBooking} = useBooking();
+
+    function handleServiceClick(svc){
+        if(LIVE_PAGE_SERVICE_IDS.has(svc.id)){
+            closeBooking();
+            navigate(`/services/${svc.id}`);
+            return;
+        }
+        onSelect?.(svc);
+    }
     return (
         <div>
 
@@ -23,7 +35,7 @@ function Step1_ServiceSelect(){
             {/* Service grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {bookingServices.map((svc) => (
-                    <button key={svc.id} onClick={() => {closeBooking(); navigate(`/services/${svc.id}`)}}
+                    <button key={svc.id} onClick={() =>handleServiceClick(svc)}
                             className="flex flex-col items-center text-center gap-2 p-4 rounded-2xl border-2 border-slate-100
                                        hover:border-cyan-400 hover:bg-cyan-50 hover:shadow-md hover:translate-y-0.5 transition-all duration-200 group">
 

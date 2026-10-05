@@ -12,9 +12,18 @@ const oswaldFontStyle = {fontFamily: "'Oswald', sans-serif", letterSpacing: "0.1
 //Navbar links
 const topLinks = [
     {label: "Home", href: "/"},
-    {label: "Packages", href:"/#packages"},
-    {label: "Contact", href:"/#contact"},
+    {label: "Packages", href:"/services/river-rafting"},
+    {label: "Contact", href:"/contact"},
 ];
+
+//Only River Rafting is live rn
+const WHATSAPP_NUMBER = "918006987421";
+const LIVE_SERVICE_SLUGS = new Set(["river-rafting"]);
+
+const buildWhatsAppUrl = (serviceName) => {
+    const text = encodeURIComponent(`Hi, I would like to know about ${serviceName}.`);
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+}
 
 function Navbar(){
 
@@ -100,9 +109,11 @@ function Navbar(){
                             <div className="bg-white rounded-2xl shadow-2xl border border-slate-100 p-3 grid grid-cols-2 gap-1">
                                 {services.map((s) =>{
                                     const Icon = s.icon;
-                                    return(
-                                        <Link key={s.slug} to={`/services/${s.slug}`}
-                                             className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-cyan-50 transition-colors duration-200 group/item">
+                                    const isLive = LIVE_SERVICE_SLUGS.has(s.slug);
+
+                                    const itemClass = "flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-cyan-50 transition-colors duration-200 group/item";
+                                    const inner = (
+                                        <>
                                             <span className="w-8 h-8 rounded-lg bg-cyan-100 text-cyan-600 flex items-center justify-center shrink-0
                                                  group-hover/item:bg-cyan-500 group-hover/item:text-white transition-colors duration-200">
                                                     <Icon size={15}/>
@@ -112,7 +123,20 @@ function Navbar(){
                                                   className="text-xs uppercase text-slate-600 group-hover/item:text-slate-900">
                                                 {s.name}
                                             </span>
+                                        </>
+                                    );
+                                    return isLive ? (
+                                        <Link key={s.slug} to={`/services/${s.slug}`} className={itemClass}>
+                                            {inner}
                                         </Link>
+                                    ) : (
+                                        <a key={s.slug}
+                                           href={buildWhatsAppUrl(s.name)}
+                                           target="_blank"
+                                           rel="noopener noreferrer"
+                                           className= {itemClass}>
+                                            {inner}
+                                        </a>
                                     );
                                 })}
                             </div>
@@ -192,14 +216,28 @@ function Navbar(){
                         ${mobileSvcOpen ? "max-h-[40rem] mt-1" : "max-h-0"}`}>
                         {services.map((s)=>{
                             const Icon = s.icon;
+                            const isLive = LIVE_SERVICE_SLUGS.has(s.slug);
+                            const itemClass = "flex items-center gap-3 pl-7 pr-4 py-2 rounded-lg text-slate-500 text-xs uppercase hover:bg-cyan-50 hover:text-cyan-600 transition-all duration-200";
                             return(
                                 <li key={s.slug}>
-                                    <Link to={`/services/${s.slug}`} onClick={closeDrawer} style={oswaldFontStyle}
-                                          className="flex items-center gap-3 pl-7 pr-4 py-2 rounded-lg text-slate-500 text-xs uppercase 
-                                          hover:bg-cyan-50 hover:text-cyan-600 transition-all duration-200">
-                                        <Icon size={14} className="text-cyan-500 shrink-0" />
-                                        {s.name}
-                                    </Link>
+                                    {isLive ? (
+                                         <Link to={`/services/${s.slug}`} onClick={closeDrawer} style={oswaldFontStyle}
+                                          className={itemClass}>
+                                            <Icon size={14} className="text-cyan-500 shrink-0" />
+                                            {s.name}
+                                        </Link>
+                                    ) : (
+                                        <a href={buildWhatsAppUrl(s.name)}
+                                           target="_blank"
+                                           rel="nopener noreferrer"
+                                           onClick={closeDrawer}
+                                           style={oswaldFontStyle}
+                                           className={itemClass}>
+                                            <Icon size={14} className="text-cyan-500 shrink-0" />
+                                            {s.name}
+                                        </a>
+                                    )}
+                                   
                                 </li>
                             );
                         })}

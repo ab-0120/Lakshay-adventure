@@ -7,18 +7,25 @@ import logo from '../assets/LA_crop.jpg';
 const oswald = { fontFamily: "'Oswald', sans-serif", letterSpacing: "0.08rem"};
 const bebas = {fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem"};
 
+//Mirrors the Navbar
+const WHATSAPP_NUMBER = "918006987421";
+const LIVE_SERVICE_SLUGS = new Set(["river-rafting"]);
+
+const buildWhatsAppUrl = (serviceName) => {
+    const text = encodeURIComponent(`Hi, Iwould like to explore ${serviceName}.`);
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+};
+
 const quickLinks = [
     {label: "Home", href: "/"},
-    {label: "Services", href: "/#services"},
-    {label: "Packages", href: "/#packages"},
-    {label: "Contact", href: "/#contact"},
+    {label: "Packages", href: "/services/river-rafting"},
+    {label: "Contact", href: "/contact"},
 ];
 
 const socials = [
-    {icon: FaInstagram, href: "https://instagram.com", label: "instagram"},
-    {icon: FaFacebook, href: "https://facebook.com", label: "facebook"},
-    {icon: FaYoutube, href: "https://youtube.com", label: "youtube"},
-    {icon: FaWhatsapp, href: "https://wa.me/918006987421", label: "whatsapp"},
+    {icon: FaInstagram, href: "https://www.instagram.com/lakshay_adventure?stkn=eXplOWhoaGF0Yzdx", label: "instagram"},
+    {icon: FaFacebook, href: "https://www.facebook.com/p/Lakshay-Adventure-61556297432004/", label: "facebook"},
+    {icon: FaWhatsapp, href: `https://wa.me/${WHATSAPP_NUMBER}`, label: "whatsapp"},
 ];
 
 //not exported only FOOTEr uses this
@@ -67,14 +74,27 @@ function Footer() {
                 <div>
                     <SectionTitle>Services</SectionTitle>
                     <ul className="grid grid-cols-1 gap-2 text-sm" style={oswald}>
-                        {services.map((s) => (
-                            <li keys={s.slug}>
-                                <Link to={`/services/${s.slug}`}
-                                      className="hover:text-cyan-400 transition-colors duration-200">
-                                    {s.name}
-                                </Link>
-                            </li>
-                        ))}
+                        {services.map((s) => {
+                            const isLive = LIVE_SERVICE_SLUGS.has(s.slug);
+                            return(
+                                <li key = {s.slug}>
+                                    {isLive ? (
+                                        <Link to={`/services/${s.slug}`}
+                                                className="hover:text-cyan-400 transition-colors duration-200">
+                                            {s.name}
+                                        </Link>
+                                    ) : (
+                                        <a href={buildWhatsAppUrl(s.name)}
+                                           target="_blank"
+                                           rel= "noopener noreferrer"
+                                           className="hover:text-cyan-400 transition-colors duration-20">
+                                         {s.name}
+                                        </a>
+                                    )}
+                                </li>
+                            );
+                        }
+                        )}
                     </ul>
                 </div>
 

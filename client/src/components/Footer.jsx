@@ -140,10 +140,10 @@ function Footer() {
                         </li>
 
                         <li>
-                            <a href="mailto:info@lakshayadventure.com"
+                            <a href="mailto:info.lakshayadventure@gmail.com"
                                className="flex items-center gap-3 hover:text-cyan-400 transition-colors">
                                 <FiMail className="text-cyan-400 shrink-0" size={16} />
-                                info@lakshayadventure.com
+                                info.lakshayadventure@gmail.com
                             </a>
                         </li>
 

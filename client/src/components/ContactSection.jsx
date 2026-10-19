@@ -10,7 +10,7 @@ const bebas = { fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem" };
 const ADDRESS = "Amkhala, Near Burger King, Lakshman Jhula Road, Tapovan, Rishikesh, Uttarakhand 249192";
 const PHONE_PRIMARY = { display: "+91 80069 87421", tel: "+918006987421", wa: "918006987421" };
 const PHONE_SECONDARY = { display: "+91 74569 94997", tel: "+917456994997", wa: "917456994997" };
-const EMAIL = "info@lakshayadventure.com";
+const EMAIL = "info.lakshayadventure@gmail.com";
 
 const mapsQuery = encodeURIComponent(ADDRESS);
 const DIRECTIONS_URL = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;

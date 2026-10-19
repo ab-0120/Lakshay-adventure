@@ -24,7 +24,7 @@ const quickLinks = [
 
 
 const socials = [
-    {icon: FaInstagram, href: "https://www.instagram.com/lakshay_adventure?stkn=eXplOWhoaGF0Yzdx", label: "instagram"},
+    {icon: FaInstagram, href: "https://www.instagram.com/lakshay_adventure", label: "instagram"},
     {icon: FaFacebook, href: "https://www.facebook.com/p/Lakshay-Adventure-61556297432004/", label: "facebook"},
     {icon: FaWhatsapp, href: `https://wa.me/${WHATSAPP_NUMBER}`, label: "whatsapp"},
 ];

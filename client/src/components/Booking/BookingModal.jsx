@@ -6,7 +6,6 @@ import Step2_Picker from "./Step2_Picker";
 import Step3_Summary from "./Step3_Summary";
 
 const oswald = {fontFamily: "'Oswald', sans-serif", letterSpacing: "0.05rem"};
-const bebas = {fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem"};
 
 function BookingModal(){
 

@@ -1,7 +1,6 @@
 import raftingImg1 from '../assets/slider/raftingImg1.jpg';
 import raftingImg2 from '../assets/slider/raftingImg2.jpg';
 import raftingImg3 from '../assets/slider/raftingImg3.jpg';
-import raftingImg4 from '../assets/slider/raftingImg4.jpg';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';

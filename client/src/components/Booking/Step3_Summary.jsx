@@ -1,4 +1,4 @@
-import { FiChevronLeft, FiMessageCircle } from "react-icons/fi";
+import {FiMessageCircle } from "react-icons/fi";
 
 const oswald = {fontFamily: "'Oswald', sans-serif", letterSpacing: "0.05rem"};
 const bebas = {fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem"};

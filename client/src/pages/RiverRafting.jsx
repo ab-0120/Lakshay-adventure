@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import ScrollProgress from "../components/ScrollProgress";
 import ScrollToTop from "../components/ScrollToTop";
 import Reveal from "../components/Reveal";
-import RaftingOptionsCard from "../components/RaftingOptionCard";
 import { raftingOptions } from "../data/raftingOptions";
 import { galleryPhotos } from "../data/galleryPhotos";
 import GalleryLightbox from "../components/GalleryLightbox";

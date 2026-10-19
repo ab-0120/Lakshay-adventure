@@ -1,4 +1,3 @@
-import Navbar from "./components/Navbar";
 import FloatingIcons from "./components/FloatingIcons";
 import Home from "./pages/Home";
 import RiverRafting from "./pages/RiverRafting";

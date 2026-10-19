@@ -4,28 +4,53 @@ import ScrollProgress from "../components/ScrollProgress";
 import ScrollToTop from "../components/ScrollToTop";
 import Reveal from "../components/Reveal";
 import RaftingOptionsCard from "../components/RaftingOptionCard";
-import {raftingOptions} from "../data/raftingOptions";
-import raftingImg from '../assets/slider/raftingImg1.jpg';
+import { raftingOptions } from "../data/raftingOptions";
+import { galleryPhotos } from "../data/galleryPhotos";
+import GalleryLightbox from "../components/GalleryLightbox";
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FiChevronRight, FiShield, FiLifeBuoy, FiAward, FiUser, FiAlertTriangle,
-         FiHeart, FiPackage, FiTruck, FiRefreshCw, FiCheck, FiX, FiInfo} from "react-icons/fi";
+import {
+    FiChevronRight, FiShield, FiLifeBuoy, FiAward, FiUser, FiAlertTriangle,
+    FiHeart, FiPackage, FiTruck, FiRefreshCw, FiCheck, FiX, FiInfo, FiImage
+} from "react-icons/fi";
 
 import RaftingOptionCard from "../components/RaftingOptionCard";
 
-const oswald = {fontFamily: "'Oswald', sans-serif", letterSpacing: "0.05rem"};
-const bebas = {fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem"};
+const oswald = { fontFamily: "'Oswald', sans-serif", letterSpacing: "0.05rem" };
+const bebas = { fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem" };
 
-const assurances= [
-    {icon: FiShield, title: "Certified Guides", text: "AORE and rescue trained on every raft."},
-    {icon: FiLifeBuoy, title: "Premium Safety Gear", text: "Helmets, life jackets & self-bailing rafts."},
-    {icon: FiAward, title: "10+ Years Experience", text: "Thousands of safe expeditions on the Ganges."},
+const assurances = [
+    { icon: FiShield, title: "Certified Guides", text: "AORE and rescue trained on every raft." },
+    { icon: FiLifeBuoy, title: "Premium Safety Gear", text: "Helmets, life jackets & self-bailing rafts." },
+    { icon: FiAward, title: "10+ Years Experience", text: "Thousands of safe expeditions on the Ganges." },
 ];
 
+// The hero banner cross-fades through the central photo library (text stays fixed).
+// Add photos in src/data/galleryPhotos.js and the banner updates automatically.
+const BANNER_MS = 5000; // banner image swaps every 5s
 
-function RiverRafting(){
-    return(
+
+function RiverRafting() {
+
+    // which banner image is showing
+    const [bannerIndex, setBannerIndex] = useState(0);
+    // full photo-library lightbox (opened by the corner button)
+    const [galleryOpen, setGalleryOpen] = useState(false);
+    const [galleryIndex, setGalleryIndex] = useState(0);
+
+    // cycle the banner image every 5s (unless the user prefers reduced motion)
+    useEffect(() => {
+        if (galleryPhotos.length <= 1) return; // nothing to cycle
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const id = setInterval(
+            () => setBannerIndex((i) => (i + 1) % galleryPhotos.length),
+            BANNER_MS
+        );
+        return () => clearInterval(id);
+    }, []);
+
+    return (
         <div>
             <ScrollProgress />
             <Navbar />
@@ -33,26 +58,46 @@ function RiverRafting(){
             {/* HERO */}
             <header className="relative h-[55vh] min-h-[380px] overflow-hidden">
 
-                {/* 1.Background Image */}
-                <img src={raftingImg} alt="River rafting" className="w-full h-full object-cover" />
+                {/* 1. Background slideshow - only the image changes, the text stays the same.
+Driven by the central library, so adding photos updates it automatically. */}
+                {galleryPhotos.map((photo, i) => (
+                    <img
+                        key={photo.id}
+                        src={photo.src}
+                        alt={photo.alt}
+                        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+                        style={{ opacity: i === bannerIndex ? 1 : 0 }}
+                    />
+                ))}
 
                 {/* 2. Dark gradient overlay so text is readable */}
                 <div className="absolute inset-0 bg-gradient-to-b from-cyan-900/70 to-slate-900/70" />
+
+                {/* Corner button -> opens the full photo library */}
+                <button
+                    onClick={() => { setGalleryIndex(0); setGalleryOpen(true); }}
+                    className="absolute top-4 right-4 z-10 inline-flex items-center gap-2 px-4 py-2 rounded-full
+bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/30
+text-white text-xs uppercase tracking-widest transition-colors"
+                    style={oswald}
+                >
+                    <FiImage size={14} /> View Photos
+                </button>
 
                 {/* 3. Cenetered text on top of everything */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
                     <Reveal>
                         <p className="text-cyan-300 text-sm tracking-[0.35em] uppercase mb-3" style={oswald}>
-                        Adventure on the Ganges
-                    </p>
+                            Adventure on the Ganges
+                        </p>
 
-                     <h1 className="text-white text-5xl md:text-7xl" style={bebas}>
-                        River Rafting in Rishikesh
-                    </h1>
+                        <h1 className="text-white text-5xl md:text-7xl" style={bebas}>
+                            River Rafting in Rishikesh
+                        </h1>
 
-                    <p className="text-slate-200 mt-4 max-w-xl text-sm md:text-base">
-                        Choose from five thrilling stretches.
-                    </p>
+                        <p className="text-slate-200 mt-4 max-w-xl text-sm md:text-base">
+                            Choose from five thrilling stretches.
+                        </p>
 
                     </Reveal>
                 </div>
@@ -60,20 +105,20 @@ function RiverRafting(){
                 {/* 4. Breadcrumb - bottom center */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-xs text-white/80 uppercase tracking-widest"
                     style={oswald}>
-                        <Link to="/" className="hover:text-cyan-300 transition-colors">Home</Link>
-                        <FiChevronRight size={13} />
-                        <span>Services</span>
-                        <FiChevronRight size={13} />
-                        <span className="text-cyan-300">River Rafting</span>
+                    <Link to="/" className="hover:text-cyan-300 transition-colors">Home</Link>
+                    <FiChevronRight size={13} />
+                    <span>Services</span>
+                    <FiChevronRight size={13} />
+                    <span className="text-cyan-300">River Rafting</span>
                 </div>
             </header>
 
             {/* Assurances strip */}
             <section className="bg-white border-b border-slate-100 px-6 md:px-16 py-8">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    {assurances.map(({icon: Icon, title, text}, i) => (
+                    {assurances.map(({ icon: Icon, title, text }, i) => (
                         <Reveal key={title} delay={i * 0.08}>
-                            <div  className="flex items-start gap-3">
+                            <div className="flex items-start gap-3">
                                 <span className="w-11 h-11 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center shrink-0">
                                     <Icon size={20} />
                                 </span>
@@ -100,7 +145,7 @@ function RiverRafting(){
                     <p className="text-slate-500 max-w-xl mx-auto mt-4 text-sm md:text-base">
                         From a gentle 9 km family float to legendary 36 km Grdae V expedition.
                     </p>
-                    <div className="mt-4 mx-auto w-16 h-1 rounded-full bg-cyan-400"/>
+                    <div className="mt-4 mx-auto w-16 h-1 rounded-full bg-cyan-400" />
                 </Reveal>
 
                 {/* Cards List */}
@@ -123,7 +168,6 @@ function RiverRafting(){
 
             {/* MUST KNOW---- */}
             <section className="bg-slate-800 px-6 md:px-16 lg:px-24 py-16 mb-5">
-                
                 {/* Section Heading */}
                 <Reveal className="text-center mb-12">
                     <p className="text-cyan-400 text-xs font-semibold tracking-[0.3em] uppercase mb-2" style={oswald}>
@@ -141,7 +185,7 @@ function RiverRafting(){
                 {/* Card */}
                 <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                    {/* Card 1: Age  & Weight */}
+                    {/* Card 1: Age & Weight */}
                     <Reveal>
                         <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700 h-full">
                             <div className="flex items-center gap-3 mb-4">
@@ -199,7 +243,7 @@ function RiverRafting(){
                         </div>
                     </Reveal>
 
-                     {/* Card 3: Clothing */}
+                    {/* Card 3: Clothing */}
                     <Reveal delay={0.04}>
                         <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700 h-full">
                             <div className="flex items-center gap-3 mb-4">
@@ -228,7 +272,7 @@ function RiverRafting(){
                         </div>
                     </Reveal>
 
-                     {/* Card 4: traffic */}
+                    {/* Card 4: traffic */}
                     <Reveal delay={0.12}>
                         <div className="bg-slate-800 rounded-2xl p-6 border border-slate-500/30 h-full">
                             <div className="flex items-center gap-3 mb-4">
@@ -276,10 +320,10 @@ function RiverRafting(){
                         {/* 3 tiles */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             {[
-                                {window: "Before 48 hours", refund: "90% Refund", color: "border-green-500/40 bg-green-500/5 text-green-400"},
-                                {window: "Before 24 hours", refund: "50% Refund", color: "border-amber-500/40 bg-amber-500/5 text-amber-400"},
-                                {window: "Less than 24 Hrs / No-Show", refund: "No Refund", color: "border-red-500/40 bg-red-500/5 text-red-400"},
-                            ].map(({window, refund, color}) => (
+                                { window: "Before 48 hours", refund: "90% Refund", color: "border-green-500/40 bg-green-500/5 text-green-400" },
+                                { window: "Before 24 hours", refund: "50% Refund", color: "border-amber-500/40 bg-amber-500/5 text-amber-400" },
+                                { window: "Less than 24 Hrs / No-Show", refund: "No Refund", color: "border-red-500/40 bg-red-500/5 text-red-400" },
+                            ].map(({ window, refund, color }) => (
                                 <div key={window} className={`rounded-xl border p-4 text-center ${color}`}>
                                     <p className="text-slate-400 text-xs uppercase tracking-widest mb-1" style={oswald}>
                                         {window}
@@ -323,23 +367,23 @@ function RiverRafting(){
 
                         {/* NOT Included */}
                         <div className="bg-slate-800 rounded-2xl p-6 border border-red-500/20">
-                                <h3 className="text-white text-xl mb-4 flex items-center gap-2" style={bebas}>
-                                    <FiX size={18} className="text-red-400" />Not Included
-                                </h3>
+                            <h3 className="text-white text-xl mb-4 flex items-center gap-2" style={bebas}>
+                                <FiX size={18} className="text-red-400" />Not Included
+                            </h3>
 
-                                <ul className="space-y-3 text-sm">
-                                    {[
-                                        "Personal travel insurance",
-                                        "Meals or refreshments (unless specified)",
-                                        "Photography / GoPro footage (available at extra cost)",
-                                        "Any personal medical expenses",
-                                    ].map((item) => (
-                                        <li key={item} className="flex items-start gap-2 text-slate-300">
-                                            <FiX size={14} className="text-red-400 mt-0.5 shrink-0" />
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
+                            <ul className="space-y-3 text-sm">
+                                {[
+                                    "Personal travel insurance",
+                                    "Meals or refreshments (unless specified)",
+                                    "Photography / GoPro footage (available at extra cost)",
+                                    "Any personal medical expenses",
+                                ].map((item) => (
+                                    <li key={item} className="flex items-start gap-2 text-slate-300">
+                                        <FiX size={14} className="text-red-400 mt-0.5 shrink-0" />
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </Reveal>
@@ -348,6 +392,15 @@ function RiverRafting(){
 
             <Footer />
             <ScrollToTop />
+
+            {/* Full photo-library overlay (opened by the banner's "View Photos" button) */}
+            {galleryOpen && (
+                <GalleryLightbox
+                    index={galleryIndex}
+                    setIndex={setGalleryIndex}
+                    onClose={() => setGalleryOpen(false)}
+                />
+            )}
         </div>
     );
 }

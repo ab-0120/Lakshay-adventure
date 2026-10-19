@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
 import {FiMenu, FiX, FiChevronDown} from "react-icons/fi";
-import logo from "../assets/LA_crop.jpg";
+import logo from "../assets/logos/LA_crop.jpg";
 import {services} from '../data/services';
 import { useBooking } from "../context/BookingContext";
 

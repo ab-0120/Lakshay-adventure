@@ -2,7 +2,7 @@ import { href, Link } from "react-router-dom";
 import { FaInstagram, FaFacebook, FaYoutube, FaWhatsapp } from "react-icons/fa";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 import { services } from "../data/services";
-import logo from '../assets/LA_crop.jpg';
+import logo from '../assets/logos/LA_crop.jpg';
 
 const oswald = { fontFamily: "'Oswald', sans-serif", letterSpacing: "0.08rem"};
 const bebas = {fontFamily: "'Bebas Neue', cursive", letterSpacing: "0.05rem"};
@@ -21,6 +21,7 @@ const quickLinks = [
     {label: "Packages", href: "/services/river-rafting"},
     {label: "Contact", href: "/contact"},
 ];
+
 
 const socials = [
     {icon: FaInstagram, href: "https://www.instagram.com/lakshay_adventure?stkn=eXplOWhoaGF0Yzdx", label: "instagram"},

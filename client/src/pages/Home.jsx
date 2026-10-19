@@ -6,6 +6,7 @@ import ScrollProgress from "../components/ScrollProgress";
 import ScrollToTop from "../components/ScrollToTop";
 import ReviewsSection from "../components/ReviewsSection";
 import WhyChooseUs from "../components/WhyCooseUs";
+import GallerySection from "../components/GallerySection";
 
 export default function Home(){
     return(
@@ -17,6 +18,7 @@ export default function Home(){
             <PopularPackagesSection />
             <WhyChooseUs />
             <ReviewsSection />
+            <GallerySection />
             <Footer />
             <ScrollToTop />
         </div>

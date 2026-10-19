@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {FiStar, FiArrowRight} from "react-icons/fi";
 import Reveal from "./Reveal";
-import jdLogo from "../assets/JD_logo.png";
+import jdLogo from "../assets/logos/JD_logo.png";
 
 
 const oswald = {fontFamily: "'Oswald', sans-serif", letterSpacing: "0.05rem"};
